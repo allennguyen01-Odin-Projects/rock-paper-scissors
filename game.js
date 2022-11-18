@@ -15,32 +15,39 @@ function playRound(playerSelection, computerSelection) {
 	let outcome = "";
 
 	if (playerSelection === computerSelection) {
-		returnString = `You tie! Both chose ${playerSelection}.`;
 		outcome = "T";
 	} else if (playerSelection === "Rock") {
 		if (computerSelection === "Paper") {
-			returnString = `You lose! ${computerSelection} beats ${playerSelection}.`;
 			outcome = "L";
 		} else if (computerSelection === "Scissors") {
-			returnString = `You win! ${playerSelection} beats ${computerSelection}.`;
 			outcome = "W";
 		}
 	} else if (playerSelection === "Paper") {
-		if (computerSelection === "Rock") {
-			returnString = `You win! ${playerSelection} beats ${computerSelection}.`;
-			outcome = "W";
-		} else if (computerSelection === "Scissors") {
-			returnString = `You lose! ${computerSelection} beats ${playerSelection}.`;
+		if (computerSelection === "Scissors") {
 			outcome = "L";
+		} else if (computerSelection === "Rock") {
+			outcome = "W";
 		}
 	} else if (playerSelection === "Scissors") {
 		if (computerSelection === "Rock") {
-			returnString = `You lose! ${computerSelection} beats ${playerSelection}.`;
 			outcome = "L";
 		} else if (computerSelection === "Paper") {
-			returnString = `You win! ${playerSelection} beats ${computerSelection}.`;
 			outcome = "W";
 		}
+	}
+
+	switch (outcome) {
+		case "W":
+			returnString = `You win! ${playerSelection} beats ${computerSelection}.`;
+			break;
+		case "L":
+			returnString = `You lose! ${computerSelection} beats ${playerSelection}.`;
+			break;
+		case "T":
+			returnString = `You tie! Both chose ${playerSelection}.`;
+			break;
+		default:
+			break;
 	}
 
 	return [returnString, outcome];
