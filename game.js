@@ -9,8 +9,11 @@ function getComputerChoice() {
 function addButtonEventListeners() {
 	const buttons = document.querySelectorAll("button");
 	buttons.forEach((button) => {
-		button.addEventListener("click", (e) => {
-			console.log(e.target);
+		console.log(button.textContent);
+		button.addEventListener("click", () => {
+			const computerSelection = getComputerChoice();
+			const playerSelection = button.textContent;
+			playRound(playerSelection, computerSelection);
 		});
 	});
 }
@@ -61,6 +64,7 @@ function playRound(playerSelection, computerSelection) {
 			break;
 	}
 
+	console.log([returnString, outcome]);
 	return [returnString, outcome];
 }
 
@@ -104,4 +108,4 @@ function game() {
 	console.log(winnerString);
 }
 
-game();
+// game();
