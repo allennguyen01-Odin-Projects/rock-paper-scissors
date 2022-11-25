@@ -6,6 +6,17 @@ function getComputerChoice() {
 	return computerChoice;
 }
 
+function addButtonEventListeners() {
+	const buttons = document.querySelectorAll("button");
+	buttons.forEach((button) => {
+		button.addEventListener("click", (e) => {
+			console.log(e.target);
+		});
+	});
+}
+
+addButtonEventListeners();
+
 function playRound(playerSelection, computerSelection) {
 	playerSelection = playerSelection.toLowerCase();
 	playerSelection =
