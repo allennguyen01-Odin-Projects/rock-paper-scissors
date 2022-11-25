@@ -1,3 +1,7 @@
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
+
 function getComputerChoice() {
 	const CHOICES = ["Rock", "Paper", "Scissors"];
 	let randomChoice = Math.floor(Math.random() * CHOICES.length);
@@ -9,16 +13,9 @@ function getComputerChoice() {
 function addButtonEventListeners() {
 	const buttons = document.querySelectorAll("button");
 	buttons.forEach((button) => {
-		console.log(button.textContent);
-		button.addEventListener("click", () => {
-			const computerSelection = getComputerChoice();
-			const playerSelection = button.textContent;
-			playRound(playerSelection, computerSelection);
-		});
+		button.addEventListener("click", game);
 	});
 }
-
-addButtonEventListeners();
 
 function playRound(playerSelection, computerSelection) {
 	playerSelection = playerSelection.toLowerCase();
@@ -64,19 +61,19 @@ function playRound(playerSelection, computerSelection) {
 			break;
 	}
 
-	console.log([returnString, outcome]);
 	return [returnString, outcome];
 }
 
 function game() {
-	let playerScore = 0;
-	let computerScore = 0;
+	let scoreString = `score: ${playerScore}-${computerScore}`;
 
-	for (let i = 1; i <= 5; i++) {
-		console.log(`Round ${i}`);
-		const playerSelection = prompt("What's your move?");
-		console.log(`Player's move: ${playerSelection}.`);
+	if (playerScore < 5 && computerScore < 5) {
+		console.log(`Round ${round}`);
+		round++;
 		const computerSelection = getComputerChoice();
+		const playerSelection = this.textContent;
+
+		console.log(`Player's move: ${playerSelection}.`);
 		console.log(`Computer's move: ${computerSelection}.`);
 
 		const [returnString, outcome] = playRound(
@@ -94,18 +91,18 @@ function game() {
 			default:
 				break;
 		}
-	}
-
-	let winnerString = "";
-
-	if (playerScore > computerScore) {
-		winnerString = `You win! Score: ${playerScore}-${computerScore}`;
-	} else if (computerScore > playerScore) {
-		winnerString = `You lose! Score: ${computerScore}-${playerScore}`;
+		console.log(`Current ${scoreString}`);
 	} else {
-		winnerString = `You tie! Score: ${playerScore}-${computerScore}`;
+		let winnerString = "";
+		if (playerScore > computerScore) {
+			winnerString = `You win! Final ${scoreString}`;
+		} else if (computerScore > playerScore) {
+			winnerString = `You lose! Final ${scoreString}`;
+		} else {
+			winnerString = `You tie! Final ${scoreString}`;
+		}
+		console.log(winnerString);
 	}
-	console.log(winnerString);
 }
 
-// game();
+addButtonEventListeners();
