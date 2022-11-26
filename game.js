@@ -136,10 +136,10 @@ function game() {
 				break;
 		}
 		round.textContent = `Round: ${roundCount}`;
-		playersMove.textContent = ``;
-		computerMove.textContent = ``;
-		roundResult.textContent = ``;
-		score.textContent = ``;
+		playersMove.style.display = "none";
+		computerMove.style.display = "none";
+		roundResult.style.display = "none";
+		score.style.display = "none";
 		winner.textContent = winnerString;
 
 		console.log(winnerString);
