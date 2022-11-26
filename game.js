@@ -2,6 +2,13 @@ let playerScore = 0;
 let computerScore = 0;
 let roundCount = 0;
 
+const round = document.getElementById("round");
+const playersMove = document.getElementById("players-move");
+const computerMove = document.getElementById("computers-move");
+const roundResult = document.getElementById("round-result");
+const score = document.getElementById("score");
+const winner = document.getElementById("winner");
+
 function getComputerChoice() {
 	const CHOICES = ["Rock", "Paper", "Scissors"];
 	let randomChoice = Math.floor(Math.random() * CHOICES.length);
@@ -65,7 +72,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-	let scoreString = `Score: ${playerScore}-${computerScore}`;
+	let scoreString = `score: ${playerScore}-${computerScore}`;
 
 	if (playerScore < 5 && computerScore < 5) {
 		roundCount++;
@@ -87,26 +94,21 @@ function game() {
 			default:
 				break;
 		}
-		scoreString = `Score: ${playerScore}-${computerScore}`;
+		scoreString = `score: ${playerScore}-${computerScore}`;
 
 		console.log(`Round ${roundCount}`);
 		console.log(`Player's move: ${playerSelection}.`);
 		console.log(`Computer's move: ${computerSelection}.`);
 		console.log(returnString);
 		console.log(`Current ${scoreString}`);
-
-		const round = document.getElementById("round");
-		const playersMove = document.getElementById("players-move");
-		const computerMove = document.getElementById("computers-move");
-		const score = document.getElementById("score");
-
 		round.textContent = `Round ${roundCount}`;
 		playersMove.textContent = `Your move: ${playerSelection}`;
 		computerMove.textContent = `Computer's move: ${computerSelection}`;
-		score.textContent = scoreString;
+		roundResult.textContent = returnString;
+		score.textContent = `Current ${scoreString}`;
 	} else {
 		let winnerString = "";
-		scoreString = `Score: ${playerScore}-${computerScore}`;
+		scoreString = `score: ${playerScore}-${computerScore}`;
 
 		switch (true) {
 			case playerScore > computerScore:
@@ -118,10 +120,14 @@ function game() {
 			default:
 				break;
 		}
+		round.textContent = `Round ${roundCount}`;
+		playersMove.textContent = ``;
+		computerMove.textContent = ``;
+		roundResult.textContent = ``;
+		score.textContent = ``;
+		winner.textContent = winnerString;
 
 		console.log(winnerString);
-		const winner = document.getElementById("winner");
-		winner.textContent = winnerString;
 	}
 }
 
