@@ -78,7 +78,22 @@ function game() {
 		roundCount++;
 
 		const computerSelection = getComputerChoice();
-		const playerSelection = this.textContent;
+		const buttonID = this.id;
+		switch (buttonID) {
+			case "rock-btn":
+				playerSelection = "Rock";
+				break;
+			case "paper-btn":
+				playerSelection = "Paper";
+				break;
+			case "scissors-btn":
+				playerSelection = "Scissors";
+				break;
+			default:
+				playerSelection = "ERROR";
+				break;
+		}
+		console.log(playerSelection);
 
 		const [returnString, outcome] = playRound(
 			playerSelection,
@@ -101,7 +116,7 @@ function game() {
 		console.log(`Computer's move: ${computerSelection}.`);
 		console.log(returnString);
 		console.log(`Current ${scoreString}`);
-		round.textContent = `Round ${roundCount}`;
+		round.textContent = `Round: ${roundCount}`;
 		playersMove.textContent = `Your move: ${playerSelection}`;
 		computerMove.textContent = `Computer's move: ${computerSelection}`;
 		roundResult.textContent = returnString;
@@ -120,7 +135,7 @@ function game() {
 			default:
 				break;
 		}
-		round.textContent = `Round ${roundCount}`;
+		round.textContent = `Round: ${roundCount}`;
 		playersMove.textContent = ``;
 		computerMove.textContent = ``;
 		roundResult.textContent = ``;
