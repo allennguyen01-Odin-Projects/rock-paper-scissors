@@ -120,7 +120,7 @@ function game() {
 		playersMove.textContent = `Your move: ${playerSelection}`;
 		computerMove.textContent = `Computer's move: ${computerSelection}`;
 		roundResult.textContent = returnString;
-		score.textContent = `Current ${scoreString}`;
+		score.textContent = `${scoreString}`;
 	} else {
 		let winnerString = "";
 		scoreString = `score: ${playerScore}-${computerScore}`;
