@@ -1,6 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
-let round = 0;
+let roundCount = 0;
 
 function getComputerChoice() {
 	const CHOICES = ["Rock", "Paper", "Scissors"];
@@ -65,22 +65,18 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-	let scoreString = `score: ${playerScore}-${computerScore}`;
+	let scoreString = `Score: ${playerScore}-${computerScore}`;
 
 	if (playerScore < 5 && computerScore < 5) {
-		console.log(`Round ${round}`);
-		round++;
+		roundCount++;
+
 		const computerSelection = getComputerChoice();
 		const playerSelection = this.textContent;
-
-		console.log(`Player's move: ${playerSelection}.`);
-		console.log(`Computer's move: ${computerSelection}.`);
 
 		const [returnString, outcome] = playRound(
 			playerSelection,
 			computerSelection
 		);
-		console.log(returnString);
 
 		switch (outcome) {
 			case "W":
@@ -91,17 +87,41 @@ function game() {
 			default:
 				break;
 		}
+		scoreString = `Score: ${playerScore}-${computerScore}`;
+
+		console.log(`Round ${roundCount}`);
+		console.log(`Player's move: ${playerSelection}.`);
+		console.log(`Computer's move: ${computerSelection}.`);
+		console.log(returnString);
 		console.log(`Current ${scoreString}`);
+
+		const round = document.getElementById("round");
+		const playersMove = document.getElementById("players-move");
+		const computerMove = document.getElementById("computers-move");
+		const score = document.getElementById("score");
+
+		round.textContent = `Round ${roundCount}`;
+		playersMove.textContent = `Your move: ${playerSelection}`;
+		computerMove.textContent = `Computer's move: ${computerSelection}`;
+		score.textContent = scoreString;
 	} else {
 		let winnerString = "";
-		if (playerScore > computerScore) {
-			winnerString = `You win! Final ${scoreString}`;
-		} else if (computerScore > playerScore) {
-			winnerString = `You lose! Final ${scoreString}`;
-		} else {
-			winnerString = `You tie! Final ${scoreString}`;
+		scoreString = `Score: ${playerScore}-${computerScore}`;
+
+		switch (true) {
+			case playerScore > computerScore:
+				winnerString = `You win! Final ${scoreString}`;
+				break;
+			case playerScore < computerScore:
+				winnerString = `You lose! Final ${scoreString}`;
+				break;
+			default:
+				break;
 		}
+
 		console.log(winnerString);
+		const winner = document.getElementById("winner");
+		winner.textContent = winnerString;
 	}
 }
 
